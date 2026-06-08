@@ -20,7 +20,7 @@ function isLoggedIn() {
  */
 function requireLogin() {
     if (!isLoggedIn()) {
-        header("Location: /asset-tracking/auth/login.php");
+        header("Location: /auth/login.php");
         exit;
     }
 }
@@ -32,7 +32,9 @@ function requireLogin() {
 function requireAdmin() {
     requireLogin();
     if ($_SESSION['user_role'] !== 'admin') {
-        header("Location: /asset-tracking/dashboard/index.php");
+        // Redirect with error as specified in Task 4
+        $_SESSION['flash_error'] = "Access denied. Admins only.";
+        header("Location: /dashboard/index.php");
         exit;
     }
 }
