@@ -6,11 +6,8 @@ require_once '../config/constants.php';
 require_once '../config/db.php';
 require_once '../models/Asset.php';
 require_once '../models/Category.php';
-<<<<<<< HEAD
 require_once '../models/TransactionLog.php';
 require_once '../models/User.php';
-=======
->>>>>>> 26081a8d5c02234edb451de9aa63bcef126bfc87
 require_once '../includes/flash.php';
 
 // Build filters from GET
@@ -22,7 +19,6 @@ $filters = [
 
 $assets     = Asset::getAll($filters);
 $categories = Category::getAll();
-<<<<<<< HEAD
 $isAdmin    = currentUser() && currentUser()['role'] === 'admin';
 $users      = $isAdmin ? User::getAll() : [];
 
@@ -285,8 +281,6 @@ document.getElementById('viewModal').addEventListener('show.bs.modal', function 
 <?php
 $pageModals = ob_get_clean();
 // ── End modal capture ──
-=======
->>>>>>> 26081a8d5c02234edb451de9aa63bcef126bfc87
 
 $pageTitle  = 'Asset List';
 $activePage = 'assets';
@@ -295,17 +289,11 @@ require_once '../includes/header.php';
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h3 fw-bold mb-0">Assets</h1>
-<<<<<<< HEAD
     <?php if ($isAdmin): ?>
         <a href="<?= BASE_URL ?>/assets/add.php" class="btn btn-primary">
             <i class="bi bi-plus-lg me-1"></i> Add Asset
         </a>
     <?php endif; ?>
-=======
-    <a href="<?= BASE_URL ?>/assets/add.php" class="btn btn-primary">
-        <i class="bi bi-plus-lg me-1"></i> Add Asset
-    </a>
->>>>>>> 26081a8d5c02234edb451de9aa63bcef126bfc87
 </div>
 
 <?= showFlash() ?>
@@ -313,13 +301,7 @@ require_once '../includes/header.php';
 <!-- Filters -->
 <form method="GET" action="" class="row g-2 mb-3">
     <div class="col-md-5">
-<<<<<<< HEAD
         <input type="text" name="search" class="form-control"
-=======
-        <input type="text"
-               name="search"
-               class="form-control"
->>>>>>> 26081a8d5c02234edb451de9aa63bcef126bfc87
                placeholder="Search by name, tag, serial, location…"
                value="<?= htmlspecialchars($filters['search']) ?>">
     </div>
@@ -350,20 +332,14 @@ require_once '../includes/header.php';
     </div>
 </form>
 
-<<<<<<< HEAD
 <p class="text-muted small mb-2">
     Showing <strong><?= count($assets) ?></strong> asset<?= count($assets) !== 1 ? 's' : '' ?>
 </p>
-=======
-<!-- Count -->
-<p class="text-muted small mb-2">Showing <strong><?= count($assets) ?></strong> asset<?= count($assets) !== 1 ? 's' : '' ?></p>
->>>>>>> 26081a8d5c02234edb451de9aa63bcef126bfc87
 
 <!-- Table -->
 <?php if (empty($assets)): ?>
     <div class="alert alert-info">No assets found.</div>
 <?php else: ?>
-<<<<<<< HEAD
 <div class="card border-0 shadow-sm">
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
@@ -425,63 +401,16 @@ require_once '../includes/header.php';
                             </button>
 
                             <?php if ($isAdmin): ?>
-=======
-    <div class="card border-0 shadow-sm">
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th class="ps-4">Asset Tag</th>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Location</th>
-                        <th>Status</th>
-                        <th class="text-end pe-4">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($assets as $asset): ?>
-                        <?php
-                        $badgeClass = match($asset['status']) {
-                            'active'       => 'bg-success',
-                            'under_repair' => 'bg-warning text-dark',
-                            'disposed'     => 'bg-danger',
-                            'lost'         => 'bg-danger',
-                            default        => 'bg-secondary',
-                        };
-                        ?>
-                        <tr>
-                            <td class="ps-4 font-monospace fw-semibold">
-                                <?= htmlspecialchars($asset['asset_tag']) ?>
-                            </td>
-                            <td><?= htmlspecialchars($asset['name']) ?></td>
-                            <td><?= htmlspecialchars($asset['category_name'] ?? '—') ?></td>
-                            <td><?= htmlspecialchars($asset['location'] ?? '—') ?></td>
-                            <td>
-                                <span class="badge <?= $badgeClass ?>">
-                                    <?= ucfirst(str_replace('_', ' ', $asset['status'])) ?>
-                                </span>
-                            </td>
-                            <td class="text-end pe-4">
-                                <a href="<?= BASE_URL ?>/assets/view.php?id=<?= $asset['id'] ?>"
-                                   class="btn btn-sm btn-primary me-1">View</a>
->>>>>>> 26081a8d5c02234edb451de9aa63bcef126bfc87
                                 <a href="<?= BASE_URL ?>/assets/edit.php?id=<?= $asset['id'] ?>"
                                    class="btn btn-sm btn-secondary me-1">Edit</a>
                                 <form method="POST" action="<?= BASE_URL ?>/assets/delete.php"
                                       class="d-inline">
                                     <input type="hidden" name="id" value="<?= $asset['id'] ?>">
-<<<<<<< HEAD
                                     <button type="submit" class="btn btn-sm btn-danger"
-=======
-                                    <button type="submit"
-                                            class="btn btn-sm btn-danger"
->>>>>>> 26081a8d5c02234edb451de9aa63bcef126bfc87
                                             onclick="return confirm('Delete this asset?')">
                                         Delete
                                     </button>
                                 </form>
-<<<<<<< HEAD
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -490,15 +419,6 @@ require_once '../includes/header.php';
         </table>
     </div>
 </div>
-=======
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
->>>>>>> 26081a8d5c02234edb451de9aa63bcef126bfc87
 <?php endif; ?>
 
 <?php require_once '../includes/footer.php'; ?>
