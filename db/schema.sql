@@ -68,3 +68,30 @@ CREATE TABLE audit_logs (
     CONSTRAINT fk_audit_asset FOREIGN KEY (asset_id) REFERENCES assets(id) ON DELETE SET NULL,
     CONSTRAINT fk_audit_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- added another table for the transaction log
+SET FOREIGN_KEY_CHECKS = 0;
+
+CREATE TABLE IF NOT EXISTS transaction_logs (
+    id              INT             NOT NULL AUTO_INCREMENT,
+    asset_id        INT             NOT NULL,
+    user_id         INT             NOT NULL,
+    checked_out_by  INT             DEFAULT NULL,
+    checked_out_at  DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    due_date        DATE            NOT NULL,
+    returned_at     DATETIME        DEFAULT NULL,
+    status          ENUM('checked_out', 'returned') NOT NULL DEFAULT 'checked_out',
+    `condition`     ENUM('good', 'damaged', 'needs_repair') DEFAULT NULL,
+    notes           TEXT            DEFAULT NULL,
+
+    PRIMARY KEY (id),
+    INDEX idx_tl_asset  (asset_id),
+    INDEX idx_tl_user   (user_id),
+    INDEX idx_tl_status (status),
+    INDEX idx_tl_due    (due_date)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
