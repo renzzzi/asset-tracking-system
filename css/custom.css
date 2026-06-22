@@ -1,0 +1,219 @@
+/* ==========================================================================
+   AssetTrack — Custom Styles
+   Brand palette: BAP Color Palette
+   ========================================================================== */
+
+:root {
+    --bap-sunset-orange: #f36b2e;
+    --bap-mango: #f59a1e;
+    --bap-ocean-water: #c4e7e5;
+    --bap-brilliant-blue: #253c96;
+    --bap-oiler-navy: #19244e;
+    --bg-soft: #f5f7fb;
+    --surface: #ffffff;
+    --surface-muted: #f8fafc;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-soft: #e2e8f0;
+    --shadow-soft: 0 12px 30px rgba(15, 23, 42, 0.06);
+    --shadow-hover: 0 18px 38px rgba(15, 23, 42, 0.1);
+    --sidebar-active: linear-gradient(90deg, #0d6efd, #2563eb);
+}
+
+/* ----------------------------------------------------------------------
+   Base
+   ---------------------------------------------------------------------- */
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background:
+        radial-gradient(circle at top, rgba(196, 231, 229, 0.18), transparent 18%),
+        var(--bg-soft);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+/* ----------------------------------------------------------------------
+   Layout — outer flex wrapper is fixed; only <main> scrolls
+   ---------------------------------------------------------------------- */
+.d-flex.min-vh-100 {
+    height: 100vh;
+    overflow: hidden;
+    align-items: flex-start;
+}
+
+main {
+    background: transparent;
+    height: 100vh;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* ----------------------------------------------------------------------
+   Sidebar — stays full height, never scrolls with content
+   ---------------------------------------------------------------------- */
+.sidebar-wrap {
+    width: 260px;
+    height: 100vh;
+    flex-shrink: 0;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%);
+    border-right: 1px solid var(--border-soft);
+    box-shadow: 4px 0 18px rgba(15, 23, 42, 0.06);
+}
+
+.sidebar-brand {
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.sidebar-brand a {
+    color: var(--text-main);
+}
+
+.sidebar-brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #0d6efd, #7c3aed);
+    color: #fff;
+    box-shadow: inset 0 -2px 10px rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-brand-text {
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.82rem 0.95rem;
+    margin-bottom: 0.35rem;
+    border-radius: 12px;
+    transition: all 0.25s ease;
+}
+
+.sidebar-link:hover {
+    background: #eef5ff;
+    color: var(--bap-brilliant-blue);
+    transform: translateX(4px);
+}
+
+.sidebar-link.active {
+    background: var(--sidebar-active);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
+}
+
+.sidebar-footer {
+    border-top: 1px solid var(--border-soft);
+    color: var(--text-muted);
+}
+
+.logout-btn {
+    background: var(--surface-muted);
+    color: var(--text-main);
+    border: 1px solid var(--border-soft);
+    transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #eef5ff;
+    color: var(--bap-brilliant-blue);
+}
+
+/* ----------------------------------------------------------------------
+   Buttons
+   ---------------------------------------------------------------------- */
+.btn-primary {
+    background: linear-gradient(90deg, var(--bap-brilliant-blue), #3b5bd3);
+    border: 0;
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #1e3a8a, var(--bap-oiler-navy));
+}
+
+.btn-outline-secondary {
+    color: #334155;
+    border-color: #cbd5e1;
+}
+
+.btn-outline-secondary:hover {
+    background: #eef5ff;
+    color: #0d6efd;
+    border-color: #bfdbfe;
+}
+
+/* ----------------------------------------------------------------------
+   Cards
+   ---------------------------------------------------------------------- */
+.card {
+    border: 1px solid var(--border-soft);
+    border-radius: 0.9rem;
+    background: var(--surface);
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+/* ----------------------------------------------------------------------
+   Modal fixes
+   ---------------------------------------------------------------------- */
+.modal {
+    position: fixed !important;
+}
+
+.modal-backdrop {
+    position: fixed !important;
+}
+
+/* ----------------------------------------------------------------------
+   Tables
+   ---------------------------------------------------------------------- */
+.table thead th {
+    background: #f8fafc;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.table-hover tbody tr:hover {
+    background: #f8fbff;
+}
+
+/* ----------------------------------------------------------------------
+   Badges
+   ---------------------------------------------------------------------- */
+.badge.bg-warning {
+    background-color: var(--bap-mango) !important;
+}
+
+/* ----------------------------------------------------------------------
+   Footer
+   ---------------------------------------------------------------------- */
+.bap-footer {
+    background-color: var(--bap-oiler-navy);
+    color: var(--bap-ocean-water);
+}
+
+/* ----------------------------------------------------------------------
+   Reports — smaller transaction table headers
+   ---------------------------------------------------------------------- */
+.table-sm-headers thead th {
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+}

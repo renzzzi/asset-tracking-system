@@ -9,9 +9,13 @@ class User {
      * @return array|false
      */
     public static function getByUsername($username) {
+        if (!is_string($username) || trim($username) === '') {
+            return false;
+        }
+
         try {
             $stmt = getDB()->prepare("SELECT * FROM users WHERE username = ? LIMIT 1");
-            $stmt->execute([$username]);
+            $stmt->execute([trim($username)]);
             return $stmt->fetch();
         } catch (PDOException $e) {
             return false;
@@ -19,18 +23,34 @@ class User {
     }
 
     /**
+     * Verifies a plain-text password against the stored hash.
+     * @return bool
+     */
+    public static function verifyPassword($password, $hash) {
+        return is_string($password) && is_string($hash) && password_verify($password, $hash);
+    }
+
+    /**
      * Creates a new user and returns the new ID
      * @return int|false
      */
     public static function create($data) {
+        if (
+            empty($data['username']) ||
+            empty($data['password']) ||
+            empty($data['full_name'])
+        ) {
+            return false;
+        }
+
         try {
             $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
             $stmt = getDB()->prepare("INSERT INTO users (username, password, role, full_name, email) VALUES (?, ?, ?, ?, ?)");
             $stmt->execute([
-                $data['username'],
+                trim($data['username']),
                 $hashedPassword,
                 $data['role'] ?? 'staff',
-                $data['full_name'],
+                trim($data['full_name']),
                 $data['email'] ?? null
             ]);
             return getDB()->lastInsertId();

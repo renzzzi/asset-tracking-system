@@ -20,7 +20,7 @@ function isLoggedIn() {
  */
 function requireLogin() {
     if (!isLoggedIn()) {
-        header("Location: /auth/login.php");
+        header("Location: " . BASE_URL . "/auth/login.php");
         exit;
     }
 }
@@ -34,7 +34,7 @@ function requireAdmin() {
     if ($_SESSION['user_role'] !== 'admin') {
         // Redirect with error as specified in Task 4
         $_SESSION['flash_error'] = "Access denied. Admins only.";
-        header("Location: /dashboard/index.php");
+        header("Location: " . BASE_URL . "/dashboard/index.php");
         exit;
     }
 }

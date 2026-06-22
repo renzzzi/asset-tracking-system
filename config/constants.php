@@ -3,7 +3,7 @@
 
 define('APP_NAME', 'AssetTrack');
 define('PAGINATION_LIMIT', 20);
-define('BASE_URL', 'http://localhost/asset-tracking');
+define('BASE_URL', 'http://localhost/asset-tracking-system');
 
 // Application-wide fixed definitions
 const ASSET_STATUSES = [
