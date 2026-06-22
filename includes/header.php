@@ -62,6 +62,12 @@
                    href="<?= BASE_URL ?>/categories/index.php">
                     <i class="bi bi-tags me-2"></i> Categories
                 </a>
+                <?php if (currentUser() && currentUser()['role'] === 'admin'): ?>
+                <a class="sidebar-link <?= $activePage === 'users' ? 'active' : '' ?>"
+                   href="<?= BASE_URL ?>/users/index.php">
+                    <i class="bi bi-people me-2"></i> Users
+                </a>
+                <?php endif; ?>
                 <a class="sidebar-link <?= $activePage === 'reports' ? 'active' : '' ?>"
                    href="<?= BASE_URL ?>/reports/index.php">
                     <i class="bi bi-bar-chart me-2"></i> Reports
